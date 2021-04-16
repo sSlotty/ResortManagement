@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ResortManagement">
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".Bill"></activity>
+        <activity android:name=".Employee" />
+        <activity android:name=".ManageRoom" />
+        <activity android:name=".Booking" />
+        <activity android:name=".Dashboard" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
