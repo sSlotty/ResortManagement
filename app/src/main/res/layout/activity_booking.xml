@@ -38,5 +38,17 @@
         app:layout_constraintTop_toTopOf="@+id/imageView7"
         app:srcCompat="@drawable/booking_text_pic" />
 
+    <fragment
+        android:id="@+id/fragmentbooking"
+        android:name="com.example.resortmanagement.FragmentBooking"
+        android:layout_width="402dp"
+        android:layout_height="492dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.968" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
