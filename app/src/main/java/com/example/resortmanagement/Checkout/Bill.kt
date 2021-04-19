@@ -1,11 +1,12 @@
-package com.example.resortmanagement
+package com.example.resortmanagement.Checkout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.resortmanagement.R
 
-class ManageRoom : AppCompatActivity() {
+class Bill : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manage_room)
+        setContentView(R.layout.activity_bill)
     }
 }

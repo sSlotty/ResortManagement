@@ -1,9 +1,14 @@
-package com.example.resortmanagement
+package com.example.resortmanagement.Dashboard
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.example.resortmanagement.*
+import com.example.resortmanagement.Booking.Booking
+import com.example.resortmanagement.Checkout.Bill
+import com.example.resortmanagement.Employee.Employee
+import com.example.resortmanagement.Room.ManageRoom
 
 class Dashboard : AppCompatActivity() {
 
@@ -11,10 +16,10 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        val booking = Intent(this,Booking::class.java)
-        val manageroom = Intent(this,ManageRoom::class.java)
-        val bill = Intent(this,Bill::class.java)
-        val employee = Intent(this,Employee::class.java)
+        val booking = Intent(this, Booking::class.java)
+        val manageroom = Intent(this, ManageRoom::class.java)
+        val bill = Intent(this, Bill::class.java)
+        val employee = Intent(this, Employee::class.java)
 
         var imageBooking = findViewById<ImageView>(R.id.btnBooking)
         imageBooking.setOnClickListener{view->

@@ -2,23 +2,26 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listRoomFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentBooking">
+    tools:context=".Booking.listRoom">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="362dp"
-            android:layout_height="210dp"
+        <ImageButton
+            android:id="@+id/btnChangeFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="43dp"
+            android:backgroundTint="#00FFFFFF"
             android:src="@drawable/info_pic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="209dp" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
-

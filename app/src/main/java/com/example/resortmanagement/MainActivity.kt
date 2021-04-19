@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.resortmanagement.Dashboard.Dashboard
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val username = findViewById<EditText>(R.id.username).text;
         val password = findViewById<EditText>(R.id.password).text;
-        val intentDashboard = Intent(this,Dashboard::class.java);
+        val intentDashboard = Intent(this, Dashboard::class.java);
 
 
         btnLogin.setOnClickListener { v ->
