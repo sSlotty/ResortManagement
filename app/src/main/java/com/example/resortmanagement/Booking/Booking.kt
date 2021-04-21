@@ -20,6 +20,7 @@ class Booking : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.frameLayout, listRoom.newInstance())
             .commit()
+
     }
 
     fun changeFragment(fragment: Fragment) {
