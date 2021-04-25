@@ -49,7 +49,7 @@ class ListEmployee : Fragment() {
         val v:View = inflater.inflate(R.layout.fragment_list_employee, container, false)
 
         GlobalScope.launch(Dispatchers.Main) {
-            val result = httpGetEvents("http://localhost:5000/getuser")
+            val result = httpGetEvents("http://10.0.2.2:5000/getuser")
             Toast.makeText(activity, result, Toast.LENGTH_LONG).show()
         }
 
