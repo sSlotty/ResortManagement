@@ -6,8 +6,8 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="394dp"
-        android:layout_height="140dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -22,22 +22,92 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
 
             <TextView
-                android:id="@+id/NameTxt"
-                android:layout_width="360dp"
-                android:layout_height="109dp"
-                android:layout_marginTop="20dp"
-                android:text="--- Name ---"
+                android:id="@+id/idTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="--- ID ---"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/idLb"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nameLb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Name : "
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/jobpositionLB"
+                app:layout_constraintEnd_toStartOf="@+id/nameTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idLb" />
+
+            <TextView
+                android:id="@+id/nameTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="--- name ---"
+                app:layout_constraintEnd_toStartOf="@+id/btnDel"
+                app:layout_constraintStart_toEndOf="@+id/nameLb"
+                app:layout_constraintTop_toBottomOf="@+id/idTxt" />
+
+            <TextView
+                android:id="@+id/jobpositionLB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Job position : "
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/jobpositionTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
+
+            <TextView
+                android:id="@+id/jobpositionTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="--- Job Position ---"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/jobpositionLB"
+                app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
+
+            <TextView
+                android:id="@+id/idLb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="ID : "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/nameTxt"
+                app:layout_constraintEnd_toStartOf="@+id/idTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/btnDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/jobpositionTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nameTxt"
+                app:layout_constraintTop_toBottomOf="@+id/idTxt"
+                app:srcCompat="@android:drawable/ic_delete" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-
