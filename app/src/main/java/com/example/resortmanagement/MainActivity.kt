@@ -51,10 +51,14 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getStaff()
         viewModel.myReposponse.observe(this, Observer { response ->
-            Log.d("Response",response._id)
-            Log.d("Response",response.name)
-            Log.d("Response",response.salary.toString())
-            Log.d("Response",response.job_position)
+            if (response.isSuccessful){
+                Log.d("Response",response.body()?._id.toString())
+                Log.d("Response",response.body()?.name.toString())
+                Log.d("Response",response.body()?.salary.toString())
+                Log.d("Response",response.body()?.job_position.toString())
+            }else{
+                Toast.makeText(this,"Error :" + response.errorBody().toString() ,Toast.LENGTH_LONG)
+            }
 
         })
 
