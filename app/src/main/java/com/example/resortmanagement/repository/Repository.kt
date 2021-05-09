@@ -1,11 +1,11 @@
 package com.example.resortmanagement.repository
 
-import com.example.resortmanagement.api.RetrofitInstance
-import com.example.resortmanagement.model.Post
-import retrofit2.Response
+import com.example.resortmanagement.model.Rooms
+import com.example.resortmanagement.model.User
+import com.google.gson.JsonObject
+import io.reactivex.rxjava3.core.Observable
 
-class Repository {
-    suspend fun getStaff():Response<Post>{
-        return RetrofitInstance.api.getStaff()
-    }
+interface Repository {
+    fun getUser(): Observable<User>
+    fun getAllRoom(): Observable<Rooms>
 }

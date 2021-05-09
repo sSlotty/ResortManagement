@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
@@ -14,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.resortmanagement.Dashboard.Dashboard
-import com.example.resortmanagement.repository.Repository
+import com.example.resortmanagement.repository.RepositoryImpl
+import com.google.gson.Gson
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel : MainViewModel
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -46,21 +47,15 @@ class MainActivity : AppCompatActivity() {
         image3.startAnimation(bttom)
         btnLogin.startAnimation(bttom)
 
-        val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getStaff()
-        viewModel.myReposponse.observe(this, Observer { response ->
-            if (response.isSuccessful){
-                Log.d("Response",response.body()?._id.toString())
-                Log.d("Response",response.body()?.name.toString())
-                Log.d("Response",response.body()?.salary.toString())
-                Log.d("Response",response.body()?.job_position.toString())
-            }else{
-                Toast.makeText(this,"Error :" + response.errorBody().toString() ,Toast.LENGTH_LONG)
-            }
 
+        viewModel.getUser()
+
+        viewModel.user.observe(this, Observer { user ->
+            val json = Gson().toJson(user)
+            Toast.makeText(this, "Response $json", Toast.LENGTH_LONG).show()
         })
+
+
 
         btnLogin.setOnClickListener { v ->
 

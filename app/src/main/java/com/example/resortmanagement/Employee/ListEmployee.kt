@@ -1,7 +1,6 @@
 package com.example.resortmanagement.Employee
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resortmanagement.MainViewModel
-import com.example.resortmanagement.MainViewModelFactory
 import com.example.resortmanagement.R
-import com.example.resortmanagement.repository.Repository
+import com.example.resortmanagement.model.User
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -44,6 +41,7 @@ class ListEmployee : Fragment() {
     private var mRecyclerView:RecyclerView? = null
     private var mAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private var mLayoutManager:RecyclerView.LayoutManager? = null
+    private val viewModel by viewModel<MainViewModel>()
 
     private class EventItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {
@@ -99,11 +97,13 @@ class ListEmployee : Fragment() {
         mRecyclerView?.layoutManager = mLayoutManager
 
 
-//        GlobalScope.launch(Dispatchers.Main) {
-//            val result = httpGetEvents("http://10.0.2.2:5000/getuser")
-//
-//            if (result!=null) parseJsonEvent(result)
-//        }
+        viewModel.getUser()
+
+        viewModel.user.observe(this.viewLifecycleOwner, Observer { user ->
+            val json = Gson().toJson(user)
+            parseJsonEvent(json)
+//            Toast.makeText(context, "Response $json", Toast.LENGTH_LONG).show()
+        })
         return v
     }
 
@@ -114,25 +114,7 @@ class ListEmployee : Fragment() {
         }
     }
 
-    private suspend fun  httpGetEvents(eventUrlStr:String):String? = withContext(Dispatchers.IO) {
-        val eventUrl:URL = URL(eventUrlStr)
-        val conn:HttpURLConnection = eventUrl.openConnection() as HttpURLConnection
-        conn.requestMethod = "GET"
-        conn.connect()
 
-        val inStream:InputStream = conn.inputStream
-        val inStreamReader:InputStreamReader = InputStreamReader(inStream,"UTF-8")
-        val buffReader:BufferedReader = BufferedReader(inStreamReader)
-
-        var  sb:StringBuilder = StringBuilder()
-        var line_read:String? = buffReader.readLine()
-        while (line_read!=null) {
-            sb.append(line_read)
-            line_read = buffReader.readLine()
-        }
-        inStream.close()
-        sb.toString()
-    }
 
     private var eventObjects = ArrayList<JSONObject>()
     private fun parseJsonEvent(jsonStr:String)
