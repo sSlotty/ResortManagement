@@ -3,4 +3,13 @@
     <style name="Theme.ResortManagement" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
     </style>
+
+    <style name="Theme.ResortManagement.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ResortManagement.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ResortManagement.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

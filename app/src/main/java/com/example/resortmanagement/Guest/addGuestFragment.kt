@@ -48,8 +48,8 @@ class addGuestFragment : Fragment() {
             if (id.text.isNullOrEmpty() or name.text.isNullOrEmpty() or tel.text.isNullOrEmpty()){
                 Toast.makeText(this.context,"Input is null",Toast.LENGTH_LONG).show()
             }else{
-                val values = hashMapOf<String, Any>("id" to id, "name" to name,"tel" to tel)
-                Log.i("Value", name.toString())
+                val values = hashMapOf<String, Any>("userID" to id.text.toString(), "name" to name.text.toString(),"tel" to tel.text.toString())
+                Log.i("Value", name.text.toString())
             }
         }
         return v

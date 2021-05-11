@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.resortmanagement.Booking.Booking
+import com.example.resortmanagement.Booking.aboutBooking
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
 import com.example.resortmanagement.model.User
@@ -96,9 +98,12 @@ class ListEmployee : Fragment() {
         mRecyclerView?.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(activity)
         mRecyclerView?.layoutManager = mLayoutManager
-
         viewModel.getUser()
 
+        val btnAddEmp = v.findViewById<ImageButton>(R.id.btnAddEmp)
+        btnAddEmp.setOnClickListener {
+            (context as Employee).changeFragment(addEmpFragment.newInstance())
+        }
         viewModel.user.observe(this.viewLifecycleOwner, Observer { user ->
             val json = Gson().toJson(user)
             parseJsonEvent(json)

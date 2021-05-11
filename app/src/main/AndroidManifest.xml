@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ResortManagement"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Guest.GuestActivity"></activity>
+        <activity
+            android:name=".Checkout.TransactionActivity"
+            android:label="@string/title_activity_transaction"
+            android:theme="@style/Theme.ResortManagement.NoActionBar"></activity>
+        <activity android:name=".Guest.GuestActivity" />
         <activity android:name=".Checkout.Bill" />
         <activity android:name=".Employee.Employee" />
         <activity android:name=".Room.ManageRoom" />
