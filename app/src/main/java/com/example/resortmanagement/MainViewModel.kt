@@ -28,6 +28,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
                 Log.i("error", it.message.toString())
             })
     }
+
     fun getAllRoom(){
         repository.getAllRoom()
             .subscribeOn(Schedulers.io())

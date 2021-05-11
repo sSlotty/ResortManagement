@@ -1,6 +1,5 @@
 package com.example.resortmanagement.Employee
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,27 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.resortmanagement.Booking.Booking
-import com.example.resortmanagement.Booking.aboutBooking
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
-import com.example.resortmanagement.model.User
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.lang.StringBuilder
-import java.net.HttpURLConnection
-import java.net.URL
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,9 +36,9 @@ class ListEmployee : Fragment() {
 
     private class EventItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {
-        val IdTxt:TextView = itemView.findViewById(R.id.idTxt)
-        val NameTxt:TextView = itemView.findViewById(R.id.nameTxt)
-        val JobpositionTxt:TextView = itemView.findViewById(R.id.jobpositionTxt)
+        val idTxt:TextView = itemView.findViewById(R.id.idTxt)
+        val nameTxt:TextView = itemView.findViewById(R.id.nameTxt)
+        val jobpositionTxt:TextView = itemView.findViewById(R.id.jobpositionTxt)
     }
 
     private class EventListAdapter(var eventObjects:ArrayList<JSONObject>)
@@ -59,7 +46,7 @@ class ListEmployee : Fragment() {
     {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val viewInflater:LayoutInflater = LayoutInflater.from(parent.context)
-            val entryView:View = viewInflater.inflate(R.layout.card_entry, parent, false)
+            val entryView:View = viewInflater.inflate(R.layout.card_list_emp, parent, false)
             val entryViewHolder:EventItemViewHolder = EventItemViewHolder(entryView)
             return entryViewHolder
         }
@@ -77,9 +64,9 @@ class ListEmployee : Fragment() {
             if (holder is EventItemViewHolder)
             {
                 val eventViewHolder:EventItemViewHolder = holder
-                eventViewHolder.IdTxt.text = id
-                eventViewHolder.NameTxt.text = name
-                eventViewHolder.JobpositionTxt.text = jobposition
+                eventViewHolder.idTxt.text = id
+                eventViewHolder.nameTxt.text = name
+                eventViewHolder.jobpositionTxt.text = jobposition
             }
         }
     }
@@ -94,18 +81,23 @@ class ListEmployee : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_list_employee, container, false)
+//       Register RecyclerView Adapter
         mRecyclerView = v.findViewById(R.id.empRecyclerView)
         mRecyclerView?.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(activity)
         mRecyclerView?.layoutManager = mLayoutManager
+
         viewModel.getUser()
 
         val btnAddEmp = v.findViewById<ImageButton>(R.id.btnAddEmp)
         btnAddEmp.setOnClickListener {
             (context as Employee).changeFragment(addEmpFragment.newInstance())
         }
+
         viewModel.user.observe(this.viewLifecycleOwner, Observer { user ->
             val json = Gson().toJson(user)
+
+//            Push json to make obj
             parseJsonEvent(json)
 //            Toast.makeText(context, "Response $json", Toast.LENGTH_LONG).show()
         })
