@@ -8,7 +8,11 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
+import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
+import com.google.gson.Gson
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -17,12 +21,16 @@ import com.example.resortmanagement.R
  */
 class listRoom : Fragment() {
 
+    private val viewModel by viewModel<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(Layoutinflater: LayoutInflater,
                               container: ViewGroup?, savedInstantState: Bundle?): View?  {
+
+
 
         return Layoutinflater.inflate(R.layout.fragment_list_room, container, false)
     }
@@ -33,6 +41,15 @@ class listRoom : Fragment() {
         btnChangeFragment.setOnClickListener {
             (context as Booking).changeFragment(aboutBooking.newInstance())
         }
+
+        viewModel.getRoomStatus()
+        viewModel.roomStatus.observe(this.viewLifecycleOwner, Observer { roomStatus ->
+            val json = Gson().toJson(roomStatus)
+            Toast.makeText(this.context, "Response $json", Toast.LENGTH_LONG).show()
+        })
+
+
+
     }
 
     companion object {

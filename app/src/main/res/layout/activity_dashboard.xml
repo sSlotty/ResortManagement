@@ -63,6 +63,18 @@
         app:srcCompat="@drawable/bill_icon_pic" />
 
     <ImageView
+        android:id="@+id/btnGuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBooking"
+        app:layout_constraintVertical_bias="0.553"
+        app:srcCompat="@drawable/guest1" />
+
+    <ImageView
         android:id="@+id/btnEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

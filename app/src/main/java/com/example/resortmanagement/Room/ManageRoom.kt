@@ -9,8 +9,7 @@ class ManageRoom : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_room)
-        supportFragmentManager
-            .beginTransaction()
+        supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayoutManageroom,listRoomManagement.newInstance())
             .commit()
     }

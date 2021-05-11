@@ -1,10 +1,12 @@
 package com.example.resortmanagement.Employee
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -90,12 +92,10 @@ class ListEmployee : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_list_employee, container, false)
-
         mRecyclerView = v.findViewById(R.id.empRecyclerView)
         mRecyclerView?.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(activity)
         mRecyclerView?.layoutManager = mLayoutManager
-
 
         viewModel.getUser()
 
@@ -106,6 +106,11 @@ class ListEmployee : Fragment() {
         })
         return v
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    }
+
 
     companion object {
 
@@ -122,7 +127,7 @@ class ListEmployee : Fragment() {
         eventObjects.clear()
 
         val eventArray = JSONArray(jsonStr)
-        for (i in 0..eventArray.length()-1)
+        for (i in 0 until eventArray.length())
         {
             val eventObj = eventArray.getJSONObject(i)
             eventObjects.add(eventObj)

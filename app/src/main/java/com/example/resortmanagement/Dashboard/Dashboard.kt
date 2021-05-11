@@ -8,6 +8,7 @@ import com.example.resortmanagement.*
 import com.example.resortmanagement.Booking.Booking
 import com.example.resortmanagement.Checkout.Bill
 import com.example.resortmanagement.Employee.Employee
+import com.example.resortmanagement.Guest.GuestActivity
 import com.example.resortmanagement.Room.ManageRoom
 
 class Dashboard : AppCompatActivity() {
@@ -20,6 +21,7 @@ class Dashboard : AppCompatActivity() {
         val manageroom = Intent(this, ManageRoom::class.java)
         val bill = Intent(this, Bill::class.java)
         val employee = Intent(this, Employee::class.java)
+        val guest = Intent(this,GuestActivity::class.java)
 
         var imageBooking = findViewById<ImageView>(R.id.btnBooking)
         imageBooking.setOnClickListener{view->
@@ -39,6 +41,11 @@ class Dashboard : AppCompatActivity() {
         var imageEmployee = findViewById<ImageView>(R.id.btnEmployee)
         imageEmployee.setOnClickListener{view->
             startActivity(employee)
+        }
+
+        var imgGuest = findViewById<ImageView>(R.id.btnGuest)
+        imgGuest.setOnClickListener{ view->
+            startActivity(guest)
         }
     }
 }

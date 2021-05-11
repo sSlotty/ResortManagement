@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Booking.Booking">
+    tools:context=".Guest.GuestActivity">
+
 
     <ImageView
         android:id="@+id/imageView7"
@@ -36,7 +37,7 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView7"
-        app:srcCompat="@drawable/booking_text_pic" />
+        app:srcCompat="@drawable/guest" />
 
     <FrameLayout
         android:id="@+id/frameFragmentGuest"
