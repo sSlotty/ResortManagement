@@ -17,23 +17,26 @@
             android:id="@+id/btnAddGuest"
             android:layout_width="50dp"
             android:layout_height="65dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#00FFFFFF"
             android:src="@drawable/btn_add_room"
-            app:layout_constraintBottom_toTopOf="@+id/listGustView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.955"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listGustView"
-            android:layout_width="368dp"
-            android:layout_height="584dp"
+            android:layout_width="361dp"
+            android:layout_height="490dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="72dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddGuest">
 
         </androidx.recyclerview.widget.RecyclerView>
 

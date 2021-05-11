@@ -47,6 +47,7 @@ class listRoomManagement : Fragment() {
         val roomtypeTxt: TextView = itemView.findViewById(R.id.roomtypeTxt)
         val personTxt: TextView = itemView.findViewById(R.id.personTxt)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
+        val statusTxt: TextView = itemView.findViewById(R.id.statusTxt)
     }
 
     private class EvenetListAdapter(var eventObjects:ArrayList<JSONObject>)
@@ -66,6 +67,8 @@ class listRoomManagement : Fragment() {
             val roomtype = eventObj.getString("roomType")
             val person = eventObj.getString("person")
             val price = eventObj.getString("price")
+            val room_status = eventObj.getString("room_status")
+
 
             if (holder is listRoomManagement.EventItemViewHolder)
             {
@@ -74,6 +77,8 @@ class listRoomManagement : Fragment() {
                 eventViewHolder.roomtypeTxt.text = roomtype
                 eventViewHolder.personTxt.text = person
                 eventViewHolder.priceTxt.text = price
+                eventViewHolder.statusTxt.text = room_status
+
             }
         }
 

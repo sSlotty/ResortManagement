@@ -38,7 +38,7 @@ class ListEmployee : Fragment() {
     {
         val idTxt:TextView = itemView.findViewById(R.id.idTxt)
         val nameTxt:TextView = itemView.findViewById(R.id.nameTxt)
-        val jobpositionTxt:TextView = itemView.findViewById(R.id.jobpositionTxt)
+
     }
 
     private class EventListAdapter(var eventObjects:ArrayList<JSONObject>)
@@ -59,14 +59,14 @@ class ListEmployee : Fragment() {
             val eventObj = eventObjects.get(position)
             val id = eventObj.getString("_id")
             val name = eventObj.getString("name")
-            val jobposition = eventObj.getString("job_position")
+
 
             if (holder is EventItemViewHolder)
             {
                 val eventViewHolder:EventItemViewHolder = holder
                 eventViewHolder.idTxt.text = id
                 eventViewHolder.nameTxt.text = name
-                eventViewHolder.jobpositionTxt.text = jobposition
+
             }
         }
     }

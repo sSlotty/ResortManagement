@@ -37,10 +37,10 @@ class listRoom : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnChangeFragment = view.findViewById<ImageButton>(R.id.btnChangeFragment)
-        btnChangeFragment.setOnClickListener {
-            (context as Booking).changeFragment(aboutBooking.newInstance())
-        }
+//        val btnChangeFragment = view.findViewById<ImageButton>(R.id.btnChangeFragment)
+//        btnChangeFragment.setOnClickListener {
+//            (context as Booking).changeFragment(aboutBooking.newInstance())
+//        }
 
         viewModel.getRoomStatus()
         viewModel.roomStatus.observe(this.viewLifecycleOwner, Observer { roomStatus ->

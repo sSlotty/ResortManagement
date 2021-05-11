@@ -116,9 +116,9 @@
                 android:fontFamily="@font/mitr"
                 android:text="Price : "
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/priceTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/personLB" />
+
 
             <TextView
                 android:id="@+id/priceTxt"
@@ -129,22 +129,48 @@
                 android:fontFamily="@font/mitr"
                 android:text="--- price ---"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/personLB"
-                app:layout_constraintTop_toBottomOf="@+id/personTxt" />
+                app:layout_constraintEnd_toStartOf="@+id/btnDel"
+                app:layout_constraintStart_toEndOf="@+id/priceLB"
+                app:layout_constraintTop_toBottomOf="@+id/personTxt"
+                app:layout_constraintVertical_bias="0.0" />
 
+            <TextView
+                android:id="@+id/statusLB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/mitr"
+                android:text="Status : "
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/statusTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceLB" />
+
+
+            <TextView
+                android:id="@+id/statusTxt"
+                android:layout_width="287dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/mitr"
+                android:text="--- status ---"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/statusLB"
+                app:layout_constraintTop_toBottomOf="@+id/priceTxt"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/btnDel"
-                android:layout_width="57dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="4dp"
+                android:layout_width="51dp"
+                android:layout_height="63dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/priceTxt"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/roomtypeTxt"
                 app:layout_constraintTop_toBottomOf="@+id/roomidTxt"
-                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@android:drawable/ic_delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
