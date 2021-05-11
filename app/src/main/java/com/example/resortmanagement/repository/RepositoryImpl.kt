@@ -21,4 +21,8 @@ class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
         return dataSource.getRoomStatus()
     }
 
+    override fun getAllGuest(): Observable<Guest> {
+        return dataSource.getAllGuests()
+    }
+
 }
