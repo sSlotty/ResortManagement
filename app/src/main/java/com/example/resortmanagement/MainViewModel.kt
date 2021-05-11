@@ -9,7 +9,9 @@ import com.example.resortmanagement.repository.Repository
 import com.example.resortmanagement.repository.RepositoryImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class MainViewModel(private val repository: Repository):ViewModel() {
 
@@ -17,6 +19,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
     val allRoom: MutableLiveData<Rooms> = MutableLiveData()
     val login: MutableLiveData<LoginRes> = MutableLiveData()
     val roomStatus : MutableLiveData<Rooms> = MutableLiveData()
+    val allGuest : MutableLiveData<Guest> = MutableLiveData()
 
     fun getUser(){
         repository.getUser()
@@ -40,7 +43,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             })
     }
 
-    fun login(user:HashMap<String,Any>){
+    fun login(user:HashMap<String,Any>) {
         repository.login(user).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -60,5 +63,14 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             },{
                 Log.i("error",it.message.toString())
             })
+    }
+
+    fun getAllGuests(){
+        repository.getAllGuest().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                allGuest.value = it
+                Log.i("Values ", it.toString())
+            },{Log.i("error" , it.message.toString())})
     }
 }

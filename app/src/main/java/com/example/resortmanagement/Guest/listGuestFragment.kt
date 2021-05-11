@@ -1,15 +1,18 @@
 package com.example.resortmanagement.Guest
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
-import com.example.resortmanagement.Booking.Booking
-import com.example.resortmanagement.Booking.aboutBooking
+import androidx.fragment.app.Fragment
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
+import com.google.gson.Gson
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +26,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class listGuestFragment : Fragment() {
 
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +38,11 @@ class listGuestFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_list_guest, container, false)
-
+        viewModel.getAllGuests()
+        viewModel.allGuest.observe(this.viewLifecycleOwner, { guest ->
+            val json = Gson().toJson(guest)
+            Toast.makeText(this.context, json, Toast.LENGTH_LONG).show()
+        })
         return v
     }
 
@@ -43,8 +51,9 @@ class listGuestFragment : Fragment() {
         val btnAddGuest = view.findViewById<ImageButton>(R.id.btnAddGuest)
 
         btnAddGuest.setOnClickListener {
+
             (context as GuestActivity).changeFragment(addGuestFragment.newInstance())
-//            Toast.makeText(this.context,"Test Add Guest",Toast.LENGTH_LONG).show()
+            Toast.makeText(this.context,"Test Add Guest",Toast.LENGTH_LONG).show()
         }
     }
 

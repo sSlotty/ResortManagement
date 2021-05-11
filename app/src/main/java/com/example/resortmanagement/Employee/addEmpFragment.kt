@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.Toast
 import com.example.resortmanagement.Guest.addGuestFragment
 import com.example.resortmanagement.R
 
@@ -32,6 +34,10 @@ class addEmpFragment : Fragment() {
     ): View? {
         // Inflate the layout for this
         val v:View = inflater.inflate(R.layout.fragment_add_emp, container, false)
+        val btnSave = v.findViewById<ImageButton>(R.id.btnSaveEmp)
+        btnSave.setOnClickListener {
+            Toast.makeText(this.context,"Test Save emp",Toast.LENGTH_LONG).show()
+        }
         return v
     }
 
