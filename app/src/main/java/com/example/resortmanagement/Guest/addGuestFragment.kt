@@ -10,8 +10,14 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
+import kotlinx.android.synthetic.main.fragment_add_guest.*
+import kotlinx.android.synthetic.main.fragment_add_guest.btnSaveGuest
+import kotlinx.android.synthetic.main.fragment_add_guest.inputID
+import kotlinx.android.synthetic.main.fragment_add_guest.inputName
+import kotlinx.android.synthetic.main.fragment_add_guest.inputPhone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,28 +45,46 @@ class addGuestFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_add_guest, container, false)
-        var id = v.findViewById<EditText>(R.id.inputID)
-        var name = v.findViewById<EditText>(R.id.inputName)
-        var tel = v.findViewById<EditText>(R.id.inputPhone)
-        val btnSave = v.findViewById<ImageButton>(R.id.btnSaveGuest)
 
-        btnSave.setOnClickListener {
-            if (id.text.isNullOrEmpty() or name.text.isNullOrEmpty() or tel.text.isNullOrEmpty()){
-                Toast.makeText(this.context,"Input is null",Toast.LENGTH_LONG).show()
-            }else{
-                val values = hashMapOf<String, Any>("userID" to id.text.toString(), "name" to name.text.toString(),"tel" to tel.text.toString())
-                Log.i("Value", name.text.toString())
-            }
-        }
+
+
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        btnSaveGuest.setOnClickListener {
+            if (inputID.text.isNullOrEmpty() or inputName.text.isNullOrEmpty() or inputPhone.text.isNullOrEmpty()){
+                Toast.makeText(this.context,"Input is null",Toast.LENGTH_LONG).show()
+            }else{
+                val update = hashMapOf<String,Any>("guestID" to inputID?.text.toString(),"name" to inputName?.text.toString(),"tel" to inputPhone?.text.toString())
+                addGuest(update)
+            }
+        }
 
     }
 
+    private fun addGuest(guest:HashMap<String,Any>){
+        val load =  SweetAlertDialog(this.context, SweetAlertDialog.PROGRESS_TYPE)
+            .showCancelButton(false)
+            .setTitleText("loading...");
+
+        val success = SweetAlertDialog(this.context, SweetAlertDialog.SUCCESS_TYPE)
+            .showCancelButton(false)
+
+        load.show()
+
+
+        viewModel.addGuest(guest){ status: Boolean, text: String ->
+            if (status){
+                load.hide()
+                success.titleText = text
+                success.show()
+            }else{
+                load.hide()
+            }
+        }
+    }
     companion object {
 
         fun newInstance(): addGuestFragment {

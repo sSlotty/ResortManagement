@@ -25,4 +25,20 @@ class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
         return dataSource.getAllGuests()
     }
 
+    override fun getGuestByid(guest: HashMap<String, Any>): Observable<Guest> {
+        return dataSource.getGuestByID(guest)
+    }
+
+    override fun updateGuest(guest: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+        return dataSource.updateGuest(guest)
+    }
+
+    override fun addGuest(guest: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+        return dataSource.addGuest(guest)
+    }
+
+    override fun addEmp(emp: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+        return dataSource.adaEmp(emp)
+    }
+
 }

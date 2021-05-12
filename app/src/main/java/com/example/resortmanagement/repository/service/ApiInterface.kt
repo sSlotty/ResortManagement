@@ -22,6 +22,17 @@ interface ApiInterface {
     @POST("/authentication/token")
     fun login(@Body body: HashMap<String, Any>): Observable<LoginRes>
 
+    @GET("/guests/id")
+    fun getGuestByID(@QueryMap params: HashMap<String, Any>): Observable<Guest>
+
+    @PUT("/guests")
+    fun updateGuest(@Body body: HashMap<String, Any>):Observable<HashMap<String,Any>>
+
+    @POST("/guests")
+    fun addGuest(@Body body: HashMap<String, Any>):Observable<HashMap<String,Any>>
+
+    @POST("authentication/signup")
+    fun adaEmp(@Body body: HashMap<String, Any>):Observable<HashMap<String,Any>>
 //    @GET("/api/v2/pokedex/2/")
 //    fun getPokemonKanto(): Observable<Kanto>
 //
