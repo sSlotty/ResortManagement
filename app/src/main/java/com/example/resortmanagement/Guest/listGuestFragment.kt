@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,21 +33,24 @@ private const val ARG_PARAM2 = "param2"
  */
 class listGuestFragment : Fragment() {
 
+    lateinit var id: String
+
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private var mLayoutManager: RecyclerView.LayoutManager? = null
     private val viewModel by viewModel<MainViewModel>()
-
+    lateinit var callback :((id: String) -> Unit)
 
     private class EventItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {
+        val cardView: CardView = itemView.findViewById(R.id.cardView)
         val idTxt: TextView = itemView.findViewById(R.id.idTxt)
         val nameTxt: TextView = itemView.findViewById(R.id.nameTxt)
         val telTxt: TextView = itemView.findViewById(R.id.telTxt)
     }
 
 
-    private class EventListAdapter(var eventObjects:ArrayList<JSONObject>)
+    private class EventListAdapter(var eventObjects:ArrayList<JSONObject>, var callback :((id: String) -> Unit))
         : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -72,6 +76,10 @@ class listGuestFragment : Fragment() {
                 eventViewHolder.idTxt.text = id
                 eventViewHolder.nameTxt.text = name
                 eventViewHolder.telTxt.text = tel
+
+                eventViewHolder.cardView.setOnClickListener {
+                    callback.invoke(id)
+                }
             }
         }
     }
@@ -106,9 +114,7 @@ class listGuestFragment : Fragment() {
         val btnAddGuest = view.findViewById<ImageButton>(R.id.btnAddGuest)
 
         btnAddGuest.setOnClickListener {
-
             (context as GuestActivity).changeFragment(addGuestFragment.newInstance())
-            Toast.makeText(this.context,"Test Add Guest",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -130,7 +136,9 @@ class listGuestFragment : Fragment() {
             val eventObj = eventArray.getJSONObject(i)
             eventObjects.add(eventObj)
         }
-        mAdapter= listGuestFragment.EventListAdapter(eventObjects)
+        mAdapter= listGuestFragment.EventListAdapter(eventObjects){ id ->
+            callback.invoke(id)
+        }
         mRecyclerView?.adapter = mAdapter
     }
 }

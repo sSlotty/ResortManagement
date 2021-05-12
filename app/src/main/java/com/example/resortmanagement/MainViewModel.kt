@@ -12,6 +12,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.nio.channels.NonReadableChannelException
+import kotlin.math.log
 
 class MainViewModel(private val repository: Repository):ViewModel() {
 
@@ -43,14 +45,17 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             })
     }
 
-    fun login(user:HashMap<String,Any>) {
+    fun login(user:HashMap<String,Any>,listener:((status: Boolean,text: String) -> Unit)) {
         repository.login(user).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 login.value = it
                 Log.i("success : ",it.toString())
+
+                listener.invoke(true,it.access_token)
             }, {
                 Log.i("error", it.message.toString())
+                listener.invoke(false,"Invalid username")
             })
     }
 
@@ -73,4 +78,50 @@ class MainViewModel(private val repository: Repository):ViewModel() {
                 Log.i("Values ", it.toString())
             },{Log.i("error" , it.message.toString())})
     }
+
+    fun getGuestByID(guest:HashMap<String,Any>, listener: (status: Boolean, data:Guest) -> Unit){
+        repository.getGuestByid(guest).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                allGuest.value = it
+                listener(true, it)
+            }
+    }
+    fun updateGuest(guest: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
+        repository.updateGuest(guest).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.i("Res", it.toString())
+                listener.invoke(true, it.toString())
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(true,it.toString())
+            })
+    }
+
+    fun addGuest(guest: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
+        repository.addGuest(guest).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.i("Res", it.toString())
+                listener.invoke(true, "Success to add Guest")
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false,"Fail to add Guest")
+            })
+    }
+
+    fun addEmp(emp: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
+        repository.addEmp(emp).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.i("Res", it.toString())
+                listener.invoke(true, "Success to add Employee")
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false,"Fail to add Employee")
+            })
+    }
+
+
 }

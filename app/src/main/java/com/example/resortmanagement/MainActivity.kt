@@ -2,6 +2,7 @@ package com.example.resortmanagement
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -12,7 +13,9 @@ import androidx.lifecycle.ViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.Dashboard.Dashboard
 import com.example.resortmanagement.model.LoginRes
+import com.example.resortmanagement.repository.service.SharedPrefsUtil
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         var visible = false
         val btnLogin = findViewById<ImageButton>(R.id.btnLogin);
 
-        val username = findViewById<EditText>(R.id.username);
-        val password = findViewById<EditText>(R.id.password);
         this.intentDashboard = Intent(this, Dashboard::class.java);
 
         val top = AnimationUtils.loadAnimation(this, R.anim.top_animation)
@@ -56,10 +57,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Username or password is invalid value", Toast.LENGTH_LONG)
                     .show()
             } else {
-//                uiScope.launch {
-//
-//                    }
-                login(username.text.toString(), password.text.toString()).let { res ->
+
+                    login(username.text.toString(), password.text.toString()).let { res ->
                     Log.i("Res", res.toString())
                 }
 
@@ -73,25 +72,52 @@ class MainActivity : AppCompatActivity() {
     fun login(username: String, password: String){
         val values = hashMapOf<String, Any>("username" to username, "password" to password)
         val res = null
-        viewModel.login(values)
-        viewModel.login.observe(this, Observer { login ->
-            val json = Gson().toJson(login)
+
+        val load =  SweetAlertDialog(this@MainActivity, SweetAlertDialog.PROGRESS_TYPE)
+            .showCancelButton(false)
+            .setTitleText("Loading...");
+        load.show()
+
+        val onSuccess = SweetAlertDialog(this@MainActivity,SweetAlertDialog.SUCCESS_TYPE)
+            .showCancelButton(false)
 
 
-            val value = login.access_token.toString()
-            this.accessToken = value
-            Toast.makeText(this, "Response $value", Toast.LENGTH_LONG).show()
-            if (!this.accessToken.isNullOrEmpty()) {
-                SweetAlertDialog(this@MainActivity, SweetAlertDialog.PROGRESS_TYPE)
-                    .showCancelButton(false)
-                    .show()
+        val onError = SweetAlertDialog(this@MainActivity,SweetAlertDialog.ERROR_TYPE)
+            .setTitleText("Username or password is incorrect.")
+            .showCancelButton(false)
+
+
+
+        viewModel.login(values){ status,text ->
+            if(status){
+//                SharedPrefsUtil.setString(this,"USER_ID",username)
+
+                load.hide()
+//                onSuccess.show();
+//                onSuccess.titleText = "Login success"
+//                Toast.makeText(this, "Response $status $text", Toast.LENGTH_LONG).show()
                 startActivity(this.intentDashboard)
             } else {
-
+//                Toast.makeText(this, "Response $status", Toast.LENGTH_LONG).show()
+                load.hide()
+                onError.show()
+                ////
             }
+        }
 
-
-        })
+//        viewModel.login.observe(this, Observer { login ->
+//            Handler().postDelayed({ //
+//                val json = Gson().toJson(login)
+//                val value = login.access_token.toString()
+//                this.accessToken = value
+//                Toast.makeText(this, "Response $value", Toast.LENGTH_LONG).show()
+//                if (!this.accessToken.isNullOrEmpty()) {
+//                    startActivity(this.intentDashboard)
+//                } else {
+//
+//                }
+//            }, 2000L) //
+//        })
 
     }
 }
