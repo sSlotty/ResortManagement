@@ -55,7 +55,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputID" />
+            app:layout_constraintTop_toBottomOf="@+id/rooomId" />
 
         <TextView
             android:id="@+id/textView4"
@@ -70,10 +70,10 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputName" />
+            app:layout_constraintTop_toBottomOf="@+id/roomType" />
 
         <EditText
-            android:id="@+id/inputID"
+            android:id="@+id/rooomId"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <EditText
-            android:id="@+id/inputName"
+            android:id="@+id/roomType"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
-            android:id="@+id/inputPhone"
+            android:id="@+id/roomPerson"
             android:layout_width="298dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
@@ -140,7 +140,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputPhone"
+            app:layout_constraintTop_toBottomOf="@+id/roomPerson"
             app:layout_constraintVertical_bias="0.395" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

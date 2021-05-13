@@ -1,12 +1,16 @@
 package com.example.resortmanagement
 
+import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.resortmanagement.model.*
 import com.example.resortmanagement.repository.Repository
 import com.example.resortmanagement.repository.RepositoryImpl
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -17,33 +21,45 @@ import kotlin.math.log
 
 class MainViewModel(private val repository: Repository):ViewModel() {
 
-    val user: MutableLiveData<User> = MutableLiveData()
-    val allRoom: MutableLiveData<Rooms> = MutableLiveData()
+    val user: MutableLiveData<List<Users>> = MutableLiveData()
+    val allRoom: MutableLiveData<List<Rooms>> = MutableLiveData()
     val login: MutableLiveData<LoginRes> = MutableLiveData()
-    val roomStatus : MutableLiveData<Rooms> = MutableLiveData()
-    val allGuest : MutableLiveData<Guest> = MutableLiveData()
+    val roomStatus : MutableLiveData<List<Rooms>> = MutableLiveData()
+    val allGuest : MutableLiveData<List<Guest>> = MutableLiveData()
 
-    fun getUser(){
+    fun getUser(listener: (status: Boolean) -> Unit){
         repository.getUser()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                user.value = it
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Users>::class.java).toList()
+                user.value = data
+                listener.invoke(true)
+                Log.i("success", data.toString())
             }, {
                 Log.i("error", it.message.toString())
+                listener.invoke(false)
             })
     }
 
-    fun getAllRoom(){
-        repository.getAllRoom()
-            .subscribeOn(Schedulers.io())
+    fun addEmp(emp: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.addEmp(emp).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                allRoom.value = it
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Users>::class.java).toList()
+                user.value = data
+                if(response.status == 201){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
             },{
-                Log.i("error",it.message.toString())
+                Log.i("error", it.message.toString())
+                listener.invoke(false)
             })
     }
+
 
     fun login(user:HashMap<String,Any>,listener:((status: Boolean,text: String) -> Unit)) {
         repository.login(user).subscribeOn(Schedulers.io())
@@ -59,69 +75,91 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             })
     }
 
-    fun getRoomStatus(){
+    fun getAllRoom(listener: (status: Boolean) -> Unit){
         repository.getAllRoom()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                roomStatus.value = it
+            .subscribe({ response->
+                val data = Gson().fromJson(response.data, Array<Rooms>::class.java).toList()
+                allRoom.value = data
+                listener.invoke(true)
             },{
-                Log.i("error",it.message.toString())
+                Log.i("Res", it.toString())
+                listener.invoke(false)
             })
     }
 
-    fun getAllGuests(){
+    fun getRoomStatus(listener: (status: Boolean) -> Unit){
+        repository.getRoomStatus()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response->
+                val data = Gson().fromJson(response.data, Array<Rooms>::class.java).toList()
+                roomStatus.value = data
+                listener.invoke(true)
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
+    }
+
+    fun getAllGuests(listener: (status: Boolean) -> Unit){
         repository.getAllGuest().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                allGuest.value = it
-                Log.i("Values ", it.toString())
-            },{Log.i("error" , it.message.toString())})
+            .subscribe({ response->
+                val data = Gson().fromJson(response.data, Array<Guest>::class.java).toList()
+                allGuest.value = data
+                listener.invoke(true)
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
     }
 
-    fun getGuestByID(guest:HashMap<String,Any>, listener: (status: Boolean, data:Guest) -> Unit){
+    fun getGuestByID(guest:HashMap<String,Any>, listener: (status: Boolean) -> Unit){
         repository.getGuestByid(guest).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                allGuest.value = it
-                listener(true, it)
-            }
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Guest>::class.java).toList()
+                allGuest.value = data
+                listener(true)
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
     }
-    fun updateGuest(guest: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
+    fun updateGuest(guest: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
         repository.updateGuest(guest).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.i("Res", it.toString())
-                listener.invoke(true, it.toString())
+            .subscribe({ response->
+                val data = Gson().fromJson(response.data, Array<Guest>::class.java).toList()
+                allGuest.value = data
+                listener.invoke(true)
             },{
                 Log.i("Res", it.toString())
-                listener.invoke(true,it.toString())
+                listener.invoke(false)
             })
     }
 
-    fun addGuest(guest: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
+    fun addGuest(guest: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
         repository.addGuest(guest).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.i("Res", it.toString())
-                listener.invoke(true, "Success to add Guest")
+            .subscribe({ response->
+                val data = Gson().fromJson(response.data, Array<Guest>::class.java).toList()
+                allGuest.value = data
+                if(response.status == 201){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
             },{
                 Log.i("Res", it.toString())
-                listener.invoke(false,"Fail to add Guest")
+                listener.invoke(false)
             })
     }
 
-    fun addEmp(emp: HashMap<String, Any>, listener: (status: Boolean, text:String) -> Unit){
-        repository.addEmp(emp).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.i("Res", it.toString())
-                listener.invoke(true, "Success to add Employee")
-            },{
-                Log.i("Res", it.toString())
-                listener.invoke(false,"Fail to add Employee")
-            })
-    }
+
 
 
 }

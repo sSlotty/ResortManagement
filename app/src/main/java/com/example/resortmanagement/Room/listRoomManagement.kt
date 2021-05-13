@@ -2,27 +2,20 @@ package com.example.resortmanagement.Room
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.resortmanagement.Employee.ListEmployee
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
-import com.example.resortmanagement.model.Rooms
-import com.example.resortmanagement.model.RoomsItem
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.coroutines.coroutineContext
-import kotlin.reflect.typeOf
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -104,19 +97,14 @@ class listRoomManagement : Fragment() {
         mRecyclerView?.layoutManager = mLayoutManager
 
 
-        viewModel.getAllRoom()
-        viewModel.allRoom.observe(this.viewLifecycleOwner, Observer { rooms ->
-
-            val json = Gson().toJson(rooms)
-            parseJsonEvent(json)
-//            Toast.makeText(this.context, "Response $json", Toast.LENGTH_LONG).show()
-        })
-
-//        btnAdd.setOnClickListener { v ->
-//            Toast.makeText(this.context,"Test BTN",Toast.LENGTH_LONG)
-//        }
-
-        // Inflate the layout for this fragment
+        viewModel.getAllRoom(){ status ->
+            if (status){
+                val json = Gson().toJson(viewModel.allRoom.value)
+                parseJsonEvent(json)
+            }else{
+                Toast.makeText(this.context,"Error",Toast.LENGTH_LONG).show()
+            }
+        }
         return v
     }
 

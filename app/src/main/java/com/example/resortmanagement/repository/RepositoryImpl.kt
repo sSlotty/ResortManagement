@@ -2,14 +2,16 @@ package com.example.resortmanagement.repository
 
 import com.example.resortmanagement.model.*
 import com.example.resortmanagement.repository.service.ApiInterface
+import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Observable
 
 class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
-    override fun getUser(): Observable<User> {
+
+    override fun getUser(): Observable<Response> {
         return dataSource.getUser()
     }
 
-    override fun getAllRoom(): Observable<Rooms> {
+    override fun getAllRoom(): Observable<Response> {
         return dataSource.getAllRoom()
     }
 
@@ -17,27 +19,27 @@ class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
         return dataSource.login(user)
     }
 
-    override fun getRoomStatus(): Observable<Rooms> {
+    override fun getRoomStatus(): Observable<Response> {
         return dataSource.getRoomStatus()
     }
 
-    override fun getAllGuest(): Observable<Guest> {
+    override fun getAllGuest(): Observable<Response> {
         return dataSource.getAllGuests()
     }
 
-    override fun getGuestByid(guest: HashMap<String, Any>): Observable<Guest> {
+    override fun getGuestByid(guest: HashMap<String, Any>): Observable<Response> {
         return dataSource.getGuestByID(guest)
     }
 
-    override fun updateGuest(guest: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+    override fun updateGuest(guest: HashMap<String, Any>): Observable<Response> {
         return dataSource.updateGuest(guest)
     }
 
-    override fun addGuest(guest: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+    override fun addGuest(guest: HashMap<String, Any>): Observable<Response> {
         return dataSource.addGuest(guest)
     }
 
-    override fun addEmp(emp: HashMap<String, Any>): Observable<HashMap<String, Any>> {
+    override fun addEmp(emp: HashMap<String, Any>): Observable<Response> {
         return dataSource.adaEmp(emp)
     }
 

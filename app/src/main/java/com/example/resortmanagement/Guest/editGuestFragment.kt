@@ -5,16 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_edit_guest.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +44,7 @@ class editGuestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnSaveGuest?.setOnClickListener {
-            val update = hashMapOf<String,Any>("guestID" to inputID?.text.toString(),"name" to inputName?.text.toString(),"tel" to inputPhone?.text.toString())
+            val update = hashMapOf<String,Any>("guestID" to rooomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
             updateGuest(update)
         }
     }
@@ -68,15 +65,16 @@ class editGuestFragment : Fragment() {
         val onError = SweetAlertDialog(this.context,SweetAlertDialog.ERROR_TYPE)
             .showCancelButton(false)
 
-        viewModel.getGuestByID(values){status, data ->
+        viewModel.getGuestByID(values){status->
             if(status){
                 load.hide()
-                val json = Gson().toJson(data)
-                var name =  data[0].name
-                var tel = data[0].tel.toString()
-                inputID.text = data[0]._id
-                inputName.setText(name)
-                inputPhone.setText(tel)
+                val json = Gson().toJson(viewModel.allGuest.value)
+                val data = viewModel.allGuest.value
+                var name =  data?.get(0)?.name.toString()
+                var tel = data?.get(0)?.tel.toString()
+                rooomId.text = data?.get(0)?._id.toString()
+                roomType.setText(name)
+                roomPerson.setText(tel)
                 Toast.makeText(this.context,json,Toast.LENGTH_LONG).show()
             }else{
                 load.hide()
@@ -99,7 +97,7 @@ class editGuestFragment : Fragment() {
 
         load.show()
 
-        viewModel.updateGuest(guest){ status: Boolean, text: String ->
+        viewModel.updateGuest(guest){ status->
             if (status){
                 load.hide()
                 success.titleText = "Success to update"

@@ -1,6 +1,7 @@
 package com.example.resortmanagement.Guest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.Employee.ListEmployee
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
+import com.example.resortmanagement.model.Guest
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_edit_guest.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -100,12 +103,15 @@ class listGuestFragment : Fragment() {
         mLayoutManager = LinearLayoutManager(activity)
         mRecyclerView?.layoutManager = mLayoutManager
 
-        viewModel.getAllGuests()
 
-        viewModel.allGuest.observe(this.viewLifecycleOwner, { guest ->
-            val json = Gson().toJson(guest)
-            parseJsonEvent(json)
-        })
+        viewModel.getAllGuests(){status ->
+            if(status){
+                val json = Gson().toJson(viewModel.allGuest.value)
+                parseJsonEvent(json)
+            }else{
+              Log.i("res",viewModel.allGuest.value.toString())
+            }
+        }
         return v
     }
 

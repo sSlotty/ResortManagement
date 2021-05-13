@@ -87,20 +87,18 @@ class ListEmployee : Fragment() {
         mLayoutManager = LinearLayoutManager(activity)
         mRecyclerView?.layoutManager = mLayoutManager
 
-        viewModel.getUser()
+        viewModel.getUser{status ->
+            if (status){
+                val json = Gson().toJson(viewModel.user.value)
+                parseJsonEvent(json)
+            }
+        }
 
         val btnAddEmp = v.findViewById<ImageButton>(R.id.btnAddEmp)
         btnAddEmp.setOnClickListener {
             (context as Employee).changeFragment(addEmpFragment.newInstance())
         }
 
-        viewModel.user.observe(this.viewLifecycleOwner, Observer { user ->
-            val json = Gson().toJson(user)
-
-//            Push json to make obj
-            parseJsonEvent(json)
-//            Toast.makeText(context, "Response $json", Toast.LENGTH_LONG).show()
-        })
         return v
     }
 
