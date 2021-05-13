@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Guest.editGuestFragment">
+    tools:context=".Room.addRoomFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,76 +13,41 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/mitr"
-            android:text="International ID"
+            android:text="addRoom"
             android:textColor="#3F51B5"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="50dp"
-            android:fontFamily="@font/mitr"
-            android:text="ชื่อ - สกุล"
-            android:textColor="#3F51B5"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rooomId" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:fontFamily="@font/mitr"
-            android:text="Tel"
-            android:textColor="#3F51B5"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roomType" />
-
-        <TextView
+        <EditText
             android:id="@+id/rooomId"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/input_login"
             android:ems="10"
             android:fontFamily="@font/mitr"
-            android:hint="เลขบัตรประจำตัวประชาชน"
-            android:inputType="textPersonName"
+            android:hint="หมายเลขห้อง"
+            android:inputType="number"
             android:paddingStart="15dp"
-            android:paddingTop="10dp"
             android:textAlignment="center"
-            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            tools:layout_editor_absoluteY="143dp"
+            tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/roomType"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/input_login"
             android:ems="10"
@@ -92,54 +57,81 @@
             android:paddingStart="15dp"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            tools:layout_editor_absoluteY="215dp"
+            tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/roomPerson"
             android:layout_width="298dp"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="316dp"
             android:background="@drawable/input_login"
             android:ems="10"
             android:fontFamily="@font/mitr"
-            android:hint="เบอร์โทรศัพท์"
-            android:inputType="phone"
+            android:hint="จำนวนผู้เข้าพัก"
+            android:inputType="number"
             android:paddingStart="15dp"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/roomPrice"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="0.437" />
+            app:layout_constraintTop_toBottomOf="@+id/roomType"
+            app:layout_constraintVertical_bias="0.56" />
+
+        <EditText
+            android:id="@+id/roomPrice"
+            android:layout_width="298dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/input_login"
+            android:ems="10"
+            android:fontFamily="@font/mitr"
+            android:hint="Price"
+            android:inputType="number"
+            android:paddingStart="15dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="346dp"
+            tools:ignore="MissingConstraints" />
+        <Spinner
+            android:id="@+id/planets_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageButton
             android:id="@+id/btnSaveGuest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="50dp"
             android:backgroundTint="#00FFFFFF"
             android:src="@drawable/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/roomPerson"
-            app:layout_constraintVertical_bias="0.395" />
+            app:layout_constraintVertical_bias="1.0" />
 
-        <ImageButton
-            android:id="@+id/imageButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#00FFFFFF"
-            android:src="@drawable/editbanner"
+        <Switch
+            android:id="@+id/switchStatus"
+            android:layout_width="120dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="10dp"
+            android:scrollbarSize="20dp"
+            android:text="STATUS"
+            app:layout_constraintBottom_toTopOf="@+id/btnSaveGuest"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/roomPrice"
+            app:layout_constraintVertical_bias="0.373" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

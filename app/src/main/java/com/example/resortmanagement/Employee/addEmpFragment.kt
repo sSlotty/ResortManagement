@@ -64,16 +64,21 @@ class addEmpFragment : Fragment() {
         val success = SweetAlertDialog(this.context, SweetAlertDialog.SUCCESS_TYPE)
             .showCancelButton(false)
 
+        val error = SweetAlertDialog(this.context, SweetAlertDialog.ERROR_TYPE)
+            .showCancelButton(false)
+
         load.show()
 
 
-        viewModel.addEmp(emp){ status: Boolean, text: String ->
+        viewModel.addEmp(emp){ status: Boolean->
             if (status){
                 load.hide()
-                success.titleText = text
+                success.titleText = "Success to create"
                 success.show()
             }else{
                 load.hide()
+                error.titleText = "Fail to add employee"
+                error.show()
             }
         }
     }

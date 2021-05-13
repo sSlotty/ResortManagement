@@ -1,23 +1,18 @@
 package com.example.resortmanagement.Guest
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
-import kotlinx.android.synthetic.main.fragment_add_guest.*
 import kotlinx.android.synthetic.main.fragment_add_guest.btnSaveGuest
-import kotlinx.android.synthetic.main.fragment_add_guest.inputID
-import kotlinx.android.synthetic.main.fragment_add_guest.inputName
-import kotlinx.android.synthetic.main.fragment_add_guest.inputPhone
+import kotlinx.android.synthetic.main.fragment_add_guest.rooomId
+import kotlinx.android.synthetic.main.fragment_add_guest.roomType
+import kotlinx.android.synthetic.main.fragment_add_guest.roomPerson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,10 +49,10 @@ class addGuestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnSaveGuest.setOnClickListener {
-            if (inputID.text.isNullOrEmpty() or inputName.text.isNullOrEmpty() or inputPhone.text.isNullOrEmpty()){
+            if (rooomId.text.isNullOrEmpty() or roomType.text.isNullOrEmpty() or roomPerson.text.isNullOrEmpty()){
                 Toast.makeText(this.context,"Input is null",Toast.LENGTH_LONG).show()
             }else{
-                val update = hashMapOf<String,Any>("guestID" to inputID?.text.toString(),"name" to inputName?.text.toString(),"tel" to inputPhone?.text.toString())
+                val update = hashMapOf<String,Any>("guestID" to rooomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
                 addGuest(update)
             }
         }
@@ -72,16 +67,21 @@ class addGuestFragment : Fragment() {
         val success = SweetAlertDialog(this.context, SweetAlertDialog.SUCCESS_TYPE)
             .showCancelButton(false)
 
+        val error = SweetAlertDialog(this.context, SweetAlertDialog.ERROR_TYPE)
+            .showCancelButton(false)
+
         load.show()
 
 
-        viewModel.addGuest(guest){ status: Boolean, text: String ->
+        viewModel.addGuest(guest){ status: Boolean ->
             if (status){
                 load.hide()
-                success.titleText = text
+                success.titleText = "success to add Guest"
                 success.show()
             }else{
                 load.hide()
+                error.titleText = "Already have Guest ID"
+                error.show()
             }
         }
     }

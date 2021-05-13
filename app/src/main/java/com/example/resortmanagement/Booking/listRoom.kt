@@ -93,11 +93,15 @@ class listRoom : Fragment() {
         mRecyclerView?.layoutManager = mLayoutManager
 
 
-        viewModel.getRoomStatus()
-        viewModel.roomStatus.observe(this.viewLifecycleOwner, Observer { roomStatus ->
-            val json = Gson().toJson(roomStatus)
-            parseJsonEvent(json)
-        })
+        viewModel.getRoomStatus(){ status ->
+            if (status){
+                val json = Gson().toJson(viewModel.roomStatus.value)
+                parseJsonEvent(json)
+            }else{
+                Toast.makeText(this.context,"Error",Toast.LENGTH_LONG).show()
+            }
+        }
+
         return v
     }
 
