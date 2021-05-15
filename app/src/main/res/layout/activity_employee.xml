@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_emp3_final"
+    android:background="@drawable/backmenu1"
     tools:context=".Employee.Employee">
 
     <ImageButton
@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="68dp"
-        android:background="@android:drawable/screen_background_light_transparent"
+        android:layout_marginTop="60dp"
+        android:background="@color/float_transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_button" />
+        app:srcCompat="@drawable/whiteback_icon" />
 
     <ImageView
         android:id="@+id/imageView17"
@@ -27,13 +27,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/employee_text_pic1" />
+        app:srcCompat="@drawable/blueemp_text" />
 
     <FrameLayout
         android:id="@+id/frameFragmentEmployee"
         android:layout_width="401dp"
         android:layout_height="657dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

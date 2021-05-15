@@ -8,33 +8,33 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="617dp"
-        android:layout_height="894dp"
+        android:layout_width="414dp"
+        android:layout_height="807dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/background" />
+        app:srcCompat="@drawable/backmenu1" />
 
     <ImageButton
         android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="68dp"
-        android:background="@android:drawable/screen_background_light_transparent"
+        android:layout_marginTop="60dp"
+        android:background="@color/float_transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:srcCompat="@drawable/back_button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/whiteback_icon" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:srcCompat="@drawable/bill_text_pic" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bluebill_text" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

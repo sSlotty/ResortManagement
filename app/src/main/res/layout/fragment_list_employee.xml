@@ -14,11 +14,10 @@
             android:id="@+id/btnAddEmp"
             android:layout_width="60dp"
             android:layout_height="66dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="#00FFFFFF"
             android:src="@drawable/btn_add_room"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.941"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -36,7 +35,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
