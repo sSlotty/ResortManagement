@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.resortmanagement.Employee.Employee
+import com.example.resortmanagement.Employee.addEmpFragment
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
 import com.google.gson.Gson
@@ -112,7 +114,7 @@ class listRoomManagement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val btnAdd = view.findViewById<ImageButton>(R.id.btnAddRoom)
         btnAdd.setOnClickListener {
-            Toast.makeText(this.context,"Test btn",Toast.LENGTH_LONG).show()
+            (context as ManageRoom).chanageFragment(addRoomFragment.newInstance())
         }
     }
 
