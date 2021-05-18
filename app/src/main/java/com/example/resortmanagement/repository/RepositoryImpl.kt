@@ -43,4 +43,24 @@ class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
         return dataSource.adaEmp(emp)
     }
 
+    override fun createRoom(room: HashMap<String, Any>): Observable<Response> {
+        return dataSource.createRoom(room)
+    }
+
+    override fun getRoomByID(room: HashMap<String, Any>): Observable<Response> {
+        return dataSource.getRoomByID(room)
+    }
+
+    override fun updateRoom(room: HashMap<String, Any>): Observable<Response> {
+        return dataSource.updateRoom(room)
+    }
+
+    override fun booking(data: HashMap<String, Any>): Observable<Response> {
+        return dataSource.booking(data)
+    }
+
+    override fun getBooking(): Observable<Response> {
+        return dataSource.getTransaction()
+    }
+
 }

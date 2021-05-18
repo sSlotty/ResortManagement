@@ -10,9 +10,14 @@ class Booking : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         // Init Fragment
+        val listRoom = listRoom.newInstance()
+
+        listRoom.callback = {
+            changeFragment(aboutBooking.newInstance(it))
+        }
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frameFragmentGuest, listRoom.newInstance())
+            .replace(R.id.frameFragmentGuest, listRoom)
             .commit()
 
     }

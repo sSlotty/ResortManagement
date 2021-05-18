@@ -43,8 +43,8 @@ class editGuestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnSaveGuest?.setOnClickListener {
-            val update = hashMapOf<String,Any>("guestID" to rooomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
+        btnSaveRoom?.setOnClickListener {
+            val update = hashMapOf<String,Any>("guestID" to roomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
             updateGuest(update)
         }
     }
@@ -72,7 +72,7 @@ class editGuestFragment : Fragment() {
                 val data = viewModel.allGuest.value
                 var name =  data?.get(0)?.name.toString()
                 var tel = data?.get(0)?.tel.toString()
-                rooomId.text = data?.get(0)?._id.toString()
+                roomId.text = data?.get(0)?._id.toString()
                 roomType.setText(name)
                 roomPerson.setText(tel)
                 Toast.makeText(this.context,json,Toast.LENGTH_LONG).show()

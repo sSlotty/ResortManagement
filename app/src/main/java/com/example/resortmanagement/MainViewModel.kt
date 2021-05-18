@@ -26,6 +26,8 @@ class MainViewModel(private val repository: Repository):ViewModel() {
     val login: MutableLiveData<LoginRes> = MutableLiveData()
     val roomStatus : MutableLiveData<List<Rooms>> = MutableLiveData()
     val allGuest : MutableLiveData<List<Guest>> = MutableLiveData()
+    val booking:MutableLiveData<List<Booking>> =  MutableLiveData()
+    val transaction :MutableLiveData<List<Transasction>> = MutableLiveData()
 
     fun getUser(listener: (status: Boolean) -> Unit){
         repository.getUser()
@@ -103,6 +105,55 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             })
     }
 
+    fun addRoom(room: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.createRoom(room).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Rooms>::class.java).toList()
+                allRoom.value = data
+                if(response.status == 201){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
+            },{
+                Log.i("error", it.message.toString())
+                listener.invoke(false)
+            })
+    }
+
+    fun getRoomByID(room:HashMap<String,Any>, listener: (status: Boolean) -> Unit){
+        repository.getRoomByID(room).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Rooms>::class.java).toList()
+                allRoom.value = data
+                listener(true)
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
+    }
+
+    fun updateRoom(room: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.updateRoom(room).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                val data = Gson().fromJson(response.data, Array<Rooms>::class.java).toList()
+                allRoom.value = data
+                if(response.status == 200){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
+            },{
+                Log.i("error", it.message.toString())
+                listener.invoke(false)
+            })
+    }
+
     fun getAllGuests(listener: (status: Boolean) -> Unit){
         repository.getAllGuest().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -155,6 +206,42 @@ class MainViewModel(private val repository: Repository):ViewModel() {
 
             },{
                 Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
+    }
+
+    fun booking(data: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.booking(data).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response->
+//                val res = Gson().fromJson(response.data, Array<Booking>::class.java).toList()
+//                booking.value = res
+                if(response.status == 201){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
+            },{
+                Log.i("Res", it.toString())
+                listener.invoke(false)
+            })
+    }
+
+    fun getBooking(listener: (status: Boolean) -> Unit){
+        repository.getBooking().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                val res = Gson().fromJson(response.data, Array<Transasction>::class.java).toList()
+                transaction.value = res
+
+                if (response.status == 200){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+
+            },{
                 listener.invoke(false)
             })
     }

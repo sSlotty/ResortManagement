@@ -13,11 +13,20 @@ interface ApiInterface {
     @GET("/guests")
     fun getAllGuests(): Observable<Response>
 
+    @POST("/rooms")
+    fun createRoom(@Body body: HashMap<String, Any>): Observable<Response>
+
     @GET("/rooms")
     fun getAllRoom(): Observable<Response>
 
-    @GET("rooms/status?status=true")
+    @GET("rooms/status?status=True")
     fun getRoomStatus(): Observable<Response>
+
+    @GET("rooms/id")
+    fun getRoomByID(@QueryMap params: HashMap<String, Any>):Observable<Response>
+
+    @PUT("/rooms/id")
+    fun updateRoom(@Body body: HashMap<String, Any>):Observable<Response>
 
     @POST("/authentication/token")
     fun login(@Body body: HashMap<String, Any>): Observable<LoginRes>
@@ -33,6 +42,13 @@ interface ApiInterface {
 
     @POST("authentication/signup")
     fun adaEmp(@Body body: HashMap<String, Any>):Observable<Response>
+
+
+    @POST("transactions")
+    fun booking(@Body body: HashMap<String, Any>):Observable<Response>
+
+    @GET("transactions")
+    fun getTransaction():Observable<Response>
 //    @GET("/api/v2/pokedex/2/")
 //    fun getPokemonKanto(): Observable<Kanto>
 //

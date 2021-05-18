@@ -9,8 +9,8 @@ import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
-import kotlinx.android.synthetic.main.fragment_add_guest.btnSaveGuest
-import kotlinx.android.synthetic.main.fragment_add_guest.rooomId
+import kotlinx.android.synthetic.main.fragment_add_guest.btnSaveRoom
+import kotlinx.android.synthetic.main.fragment_add_guest.roomId
 import kotlinx.android.synthetic.main.fragment_add_guest.roomType
 import kotlinx.android.synthetic.main.fragment_add_guest.roomPerson
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,11 +48,11 @@ class addGuestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnSaveGuest.setOnClickListener {
-            if (rooomId.text.isNullOrEmpty() or roomType.text.isNullOrEmpty() or roomPerson.text.isNullOrEmpty()){
+        btnSaveRoom.setOnClickListener {
+            if (roomId.text.isNullOrEmpty() or roomType.text.isNullOrEmpty() or roomPerson.text.isNullOrEmpty()){
                 Toast.makeText(this.context,"Input is null",Toast.LENGTH_LONG).show()
             }else{
-                val update = hashMapOf<String,Any>("guestID" to rooomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
+                val update = hashMapOf<String,Any>("guestID" to roomId?.text.toString(),"name" to roomType?.text.toString(),"tel" to roomPerson?.text.toString())
                 addGuest(update)
             }
         }

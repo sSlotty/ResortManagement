@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +36,7 @@ class listRoomManagement : Fragment() {
     private var mRecyclerView:RecyclerView? = null
     private var mAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private var mLayoutManager:RecyclerView.LayoutManager? = null
-
+    lateinit var callback :((id: String) -> Unit)
 
     private class EventItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         val roomidTxt: TextView = itemView.findViewById(R.id.roomidTxt)
@@ -43,9 +44,10 @@ class listRoomManagement : Fragment() {
         val personTxt: TextView = itemView.findViewById(R.id.personTxt)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
         val statusTxt: TextView = itemView.findViewById(R.id.statusTxt)
+        val cardView: CardView = itemView.findViewById(R.id.card_room)
     }
 
-    private class EvenetListAdapter(var eventObjects:ArrayList<JSONObject>)
+    private class EvenetListAdapter(var eventObjects:ArrayList<JSONObject>,var callback :((id: String) -> Unit))
         : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -73,7 +75,9 @@ class listRoomManagement : Fragment() {
                 eventViewHolder.personTxt.text = person
                 eventViewHolder.priceTxt.text = price
                 eventViewHolder.statusTxt.text = room_status
-
+                eventViewHolder.cardView.setOnClickListener{
+                    callback.invoke(roomid)
+                }
             }
         }
 
@@ -129,7 +133,9 @@ class listRoomManagement : Fragment() {
             val eventObj = eventArray.getJSONObject(i)
             eventObjects.add(eventObj)
         }
-        mAdapter= listRoomManagement.EvenetListAdapter(eventObjects)
+        mAdapter= listRoomManagement.EvenetListAdapter(eventObjects){
+            callback.invoke(it)
+        }
         mRecyclerView?.adapter = mAdapter
     }
 
