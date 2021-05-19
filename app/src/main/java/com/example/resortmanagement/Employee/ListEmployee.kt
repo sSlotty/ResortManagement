@@ -91,7 +91,6 @@ class ListEmployee : Fragment() {
         viewModel.getUser{status ->
             if (status){
                 val json = Gson().toJson(viewModel.user.value)
-                Toast.makeText(context,json.toString(),Toast.LENGTH_LONG).show()
                 parseJsonEvent(json)
             }
         }

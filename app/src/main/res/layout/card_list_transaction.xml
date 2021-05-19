@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_room"
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -28,20 +28,20 @@
 
             <TextView
                 android:id="@+id/idLb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="31dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/mitr"
                 android:text="ID : "
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/roomidTxt"
+                app:layout_constraintEnd_toStartOf="@+id/id_transactionTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/roomidTxt"
+                android:id="@+id/id_transactionTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -49,107 +49,61 @@
                 android:text="--- ID ---"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/idLb"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/roomtypeLb"
+                android:id="@+id/check_inLB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/mitr"
-                android:text="Room Type : "
+                android:text="Date : "
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/roomtypeTxt"
+                app:layout_constraintEnd_toStartOf="@+id/check_inTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/idLb" />
 
             <TextView
-                android:id="@+id/roomtypeTxt"
+                android:id="@+id/check_inTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/mitr"
-                android:text="--- room type ---"
-                app:layout_constraintStart_toEndOf="@+id/roomtypeLb"
-                app:layout_constraintTop_toBottomOf="@+id/roomidTxt" />
+                android:text="--- check in ---"
+                app:layout_constraintStart_toEndOf="@+id/check_inLB"
+                app:layout_constraintTop_toBottomOf="@+id/id_transactionTxt" />
 
             <TextView
-                android:id="@+id/personLB"
+                android:id="@+id/guest_idLB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/mitr"
-                android:text="Person : "
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/personTxt"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/roomtypeTxt" />
-
-            <TextView
-                android:id="@+id/personTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:fontFamily="@font/mitr"
-                android:text="--- person ---"
-                app:layout_constraintStart_toEndOf="@+id/personLB"
-                app:layout_constraintTop_toBottomOf="@+id/roomtypeTxt" />
-
-            <TextView
-                android:id="@+id/priceLB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="1dp"
-                android:fontFamily="@font/mitr"
-                android:text="Price : "
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/personLB" />
-
-
-            <TextView
-                android:id="@+id/priceTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:fontFamily="@font/mitr"
-                android:text="--- price ---"
-                app:layout_constraintStart_toEndOf="@+id/priceLB"
-                app:layout_constraintTop_toBottomOf="@+id/personTxt" />
-
-            <TextView
-                android:id="@+id/statusLB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/mitr"
-                android:text="Status : "
+                android:text="Guest ID : "
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/statusTxt"
+                app:layout_constraintEnd_toStartOf="@+id/guest_idTxt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceLB" />
+                app:layout_constraintTop_toBottomOf="@+id/check_inLB" />
 
 
             <TextView
-                android:id="@+id/statusTxt"
-                android:layout_width="287dp"
+                android:id="@+id/guest_idTxt"
+                android:layout_width="258dp"
                 android:layout_height="21dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/mitr"
-                android:text="--- status ---"
+                android:text="--- Guest ID ---"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/statusLB"
-                app:layout_constraintTop_toBottomOf="@+id/priceTxt"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/guest_idLB"
+                app:layout_constraintTop_toBottomOf="@+id/check_inLB" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

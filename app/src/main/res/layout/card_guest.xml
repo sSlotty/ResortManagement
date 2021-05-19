@@ -45,11 +45,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/mitr"
                 android:text="--- ID ---"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/nameTxt"
                 app:layout_constraintStart_toEndOf="@+id/idLb"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +72,6 @@
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/mitr"
                 android:text="--- name ---"
-                app:layout_constraintEnd_toStartOf="@+id/btnDel"
                 app:layout_constraintStart_toEndOf="@+id/nameLB"
                 app:layout_constraintTop_toBottomOf="@+id/idTxt" />
 
@@ -105,16 +103,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/telLB"
                 app:layout_constraintTop_toBottomOf="@+id/nameLB" />
-
-            <ImageView
-                android:id="@+id/btnDel"
-                android:layout_width="46dp"
-                android:layout_height="49dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_delete" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
