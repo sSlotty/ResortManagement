@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/bluebooking_text" />
 
     <FrameLayout
-        android:id="@+id/frameFragmentGuest"
+        android:id="@+id/frameFragmentMap"
         android:layout_width="380dp"
         android:layout_height="502dp"
         android:layout_marginStart="8dp"

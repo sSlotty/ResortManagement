@@ -17,7 +17,7 @@ class Booking : AppCompatActivity() {
         }
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frameFragmentGuest, listRoom)
+            .replace(R.id.frameFragmentMap, listRoom)
             .commit()
 
     }
@@ -25,7 +25,7 @@ class Booking : AppCompatActivity() {
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frameFragmentGuest, fragment)
+            .replace(R.id.frameFragmentMap, fragment)
             .addToBackStack(null)
             .commit()
     }

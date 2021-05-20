@@ -3,7 +3,6 @@ package com.example.resortmanagement.Guest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.resortmanagement.Employee.ListEmployee
 import com.example.resortmanagement.MainViewModel
 import com.example.resortmanagement.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,7 +20,7 @@ class GuestActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frameFragmentGuest, listGuestFragment)
+            .replace(R.id.frameFragmentMap, listGuestFragment)
             .commit()
 
 
@@ -32,7 +31,7 @@ class GuestActivity : AppCompatActivity() {
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frameFragmentGuest, fragment)
+            .replace(R.id.frameFragmentMap, fragment)
             .addToBackStack(null)
             .commit()
     }

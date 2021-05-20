@@ -9,7 +9,9 @@ import com.example.resortmanagement.Booking.Booking
 import com.example.resortmanagement.Checkout.Bill
 import com.example.resortmanagement.Employee.Employee
 import com.example.resortmanagement.Guest.GuestActivity
+import com.example.resortmanagement.Map.MapsActivity
 import com.example.resortmanagement.Room.ManageRoom
+import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class Dashboard : AppCompatActivity() {
 
@@ -22,7 +24,7 @@ class Dashboard : AppCompatActivity() {
         val bill = Intent(this, Bill::class.java)
         val employee = Intent(this, Employee::class.java)
         val guest = Intent(this,GuestActivity::class.java)
-
+        val map = Intent(this,MapsActivity::class.java)
         var imageBooking = findViewById<ImageView>(R.id.btnBooking)
         imageBooking.setOnClickListener{view->
             startActivity(booking)
@@ -46,6 +48,10 @@ class Dashboard : AppCompatActivity() {
         var imgGuest = findViewById<ImageView>(R.id.btnGuest)
         imgGuest.setOnClickListener{ view->
             startActivity(guest)
+        }
+
+        btnMap.setOnClickListener {
+            startActivity(map)
         }
     }
 }
