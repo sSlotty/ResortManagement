@@ -45,7 +45,7 @@ class editRoomFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_edit_room, container, false)
-         Toast.makeText(this.context,this.id.toString(),Toast.LENGTH_LONG).show()
+//         Toast.makeText(this.context,this.id.toString(),Toast.LENGTH_LONG).show()
 
         return v
     }
@@ -103,7 +103,7 @@ class editRoomFragment : Fragment() {
                 roomPrice.setText(data?.get(0)?.price.toString())
                 roomPerson.setText(data?.get(0)?.person.toString())
                 switchStatus.isChecked = data?.get(0)?.room_status.toBoolean()
-                Toast.makeText(this.context,data.toString(),Toast.LENGTH_LONG).show()
+//                Toast.makeText(this.context,data.toString(),Toast.LENGTH_LONG).show()
             }else{
                 load.hide()
                 error.show()

@@ -140,11 +140,13 @@
 
             <TextView
                 android:id="@+id/statusTxt"
-                android:layout_width="287dp"
+                android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/mitr"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:text="--- status ---"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/statusLB"

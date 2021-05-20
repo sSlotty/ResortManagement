@@ -1,6 +1,7 @@
 package com.example.resortmanagement.Room
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -75,6 +76,15 @@ class listRoomManagement : Fragment() {
                 eventViewHolder.personTxt.text = person
                 eventViewHolder.priceTxt.text = price
                 eventViewHolder.statusTxt.text = room_status
+                if(room_status.equals("True")){
+                    eventViewHolder.statusTxt.text = "ห้องว่าง"
+                    eventViewHolder.statusTxt.setBackgroundColor(Color.parseColor("#10B981"))
+                    eventViewHolder.statusTxt.setTextColor(Color.WHITE)
+                }else{
+                    eventViewHolder.statusTxt.text = "ห้องไม่ว่าง"
+                    eventViewHolder.statusTxt.setBackgroundColor(Color.parseColor("#EF4444"))
+                    eventViewHolder.statusTxt.setTextColor(Color.WHITE)
+                }
                 eventViewHolder.cardView.setOnClickListener{
                     callback.invoke(roomid)
                 }

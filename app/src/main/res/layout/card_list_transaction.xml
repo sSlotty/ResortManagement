@@ -23,7 +23,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="125dp"
             android:background="#FFFFFF">
 
             <TextView
@@ -75,6 +75,7 @@
                 app:layout_constraintStart_toEndOf="@+id/check_inLB"
                 app:layout_constraintTop_toBottomOf="@+id/id_transactionTxt" />
 
+
             <TextView
                 android:id="@+id/guest_idLB"
                 android:layout_width="wrap_content"
@@ -89,8 +90,26 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guest_idTxt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/check_inLB" />
+                app:layout_constraintTop_toBottomOf="@+id/check_inLB"
+                app:layout_constraintVertical_bias="0.127" />
 
+            <TextView
+                android:id="@+id/textTD1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/mitr"
+                android:text="Status  : "
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guest_idTxt"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guest_idLB"
+                app:layout_constraintVertical_bias="0.428" />
 
             <TextView
                 android:id="@+id/guest_idTxt"
@@ -102,7 +121,24 @@
                 android:text="--- Guest ID ---"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guest_idLB"
-                app:layout_constraintTop_toBottomOf="@+id/check_inLB" />
+                app:layout_constraintTop_toBottomOf="@+id/check_inLB"
+                app:layout_constraintVertical_bias="0.127" />
+
+            <TextView
+                android:id="@+id/status_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/mitr"
+                android:paddingStart="15dp"
+                android:paddingLeft="15dp"
+                android:paddingEnd="15dp"
+                android:text="--- Status ---"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textTD1"
+                app:layout_constraintTop_toBottomOf="@+id/guest_idTxt"
+                app:layout_constraintVertical_bias="0.428" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

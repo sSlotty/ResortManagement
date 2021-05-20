@@ -28,6 +28,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
     val allGuest : MutableLiveData<List<Guest>> = MutableLiveData()
     val booking:MutableLiveData<List<Booking>> =  MutableLiveData()
     val transaction :MutableLiveData<List<Transasction>> = MutableLiveData()
+    val TransasctionByID: MutableLiveData<List<TransasctionByID>> = MutableLiveData()
 
     fun getUser(listener: (status: Boolean) -> Unit){
         repository.getUser()
@@ -241,6 +242,36 @@ class MainViewModel(private val repository: Repository):ViewModel() {
                     listener.invoke(false)
                 }
 
+            },{
+                listener.invoke(false)
+            })
+    }
+
+    fun getBookingByID(data: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.getBookingById(data).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response->
+                val res = Gson().fromJson(response.data,Array<TransasctionByID>::class.java).toList()
+                TransasctionByID.value = res
+                if(response.status == 200){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
+                       },{
+                listener.invoke(false)
+            })
+    }
+
+    fun checkOut(data: HashMap<String, Any>, listener: (status: Boolean) -> Unit){
+        repository.checkOut(data).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({response->
+                if(response.status == 200){
+                    listener.invoke(true)
+                }else{
+                    listener.invoke(false)
+                }
             },{
                 listener.invoke(false)
             })

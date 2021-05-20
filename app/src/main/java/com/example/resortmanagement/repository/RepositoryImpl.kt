@@ -63,4 +63,12 @@ class RepositoryImpl(private val dataSource: ApiInterface) : Repository {
         return dataSource.getTransaction()
     }
 
+    override fun getBookingById(data: HashMap<String, Any>): Observable<Response> {
+        return dataSource.getTransactionByID(data)
+    }
+
+    override fun checkOut(data: HashMap<String, Any>): Observable<Response> {
+        return dataSource.checkOut(data)
+    }
+
 }

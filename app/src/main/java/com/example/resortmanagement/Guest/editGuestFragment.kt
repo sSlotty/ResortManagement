@@ -75,7 +75,7 @@ class editGuestFragment : Fragment() {
                 roomId.text = data?.get(0)?._id.toString()
                 roomType.setText(name)
                 roomPerson.setText(tel)
-                Toast.makeText(this.context,json,Toast.LENGTH_LONG).show()
+//                Toast.makeText(this.context,json,Toast.LENGTH_LONG).show()
             }else{
                 load.hide()
                 onError.titleText = "Sorry , userID incorrect or Network connection lost."

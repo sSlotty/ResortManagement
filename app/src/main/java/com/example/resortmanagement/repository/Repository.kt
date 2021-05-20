@@ -19,4 +19,6 @@ interface Repository {
     fun updateRoom(room: HashMap<String, Any>):Observable<Response>
     fun booking(data:HashMap<String,Any>):Observable<Response>
     fun getBooking():Observable<Response>
+    fun getBookingById(data:HashMap<String,Any>):Observable<Response>
+    fun checkOut(data: HashMap<String, Any>):Observable<Response>
 }

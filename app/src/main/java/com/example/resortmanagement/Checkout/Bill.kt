@@ -12,9 +12,9 @@ class Bill : AppCompatActivity() {
         setContentView(R.layout.activity_bill)
         val transac = listTransactionFragment.newInstance()
 
-//        listRoom.callback = {
-//            changeFragment(aboutBooking.newInstance(it))
-//        }
+        transac.callback = {
+            changeFragment(TransactionsDetailFragment.newInstance(it))
+        }
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frameBill, transac)

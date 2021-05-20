@@ -49,6 +49,13 @@ interface ApiInterface {
 
     @GET("transactions")
     fun getTransaction():Observable<Response>
+
+    @GET("transactions/id")
+    fun getTransactionByID(@QueryMap params: HashMap<String, Any>):Observable<Response>
+
+    @POST("checkout")
+    fun checkOut(@Body body: HashMap<String, Any>):Observable<Response>
+
 //    @GET("/api/v2/pokedex/2/")
 //    fun getPokemonKanto(): Observable<Kanto>
 //

@@ -1,5 +1,6 @@
 package com.example.resortmanagement.Checkout
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resortmanagement.Booking.listRoom
@@ -30,16 +32,18 @@ class listTransactionFragment : Fragment() {
     private var mAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private var mLayoutManager:RecyclerView.LayoutManager? = null
     private val viewModel by viewModel<MainViewModel>()
+    lateinit var callback :((id: String) -> Unit)
 
     private class EventItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
     {
         val id_transactionTxt: TextView = itemView.findViewById(R.id.id_transactionTxt)
         val check_inTxt: TextView = itemView.findViewById(R.id.check_inTxt)
         val guest_idTxt: TextView = itemView.findViewById(R.id.guest_idTxt)
-
+        val statusTxt : TextView = itemView.findViewById(R.id.status_Txt)
+        val cardView:CardView = itemView.findViewById(R.id.cardView)
     }
 
-    private class EventListAdapter(var eventObjects:ArrayList<JSONObject>)
+    private class EventListAdapter(var eventObjects:ArrayList<JSONObject>,var callback:((id:String)->Unit))
         : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -58,7 +62,7 @@ class listTransactionFragment : Fragment() {
             val id = eventObj.getString("_id")
             val check_in = eventObj.getString("check_in")
             val guestID = eventObj.getString("guestID")
-
+            val status = eventObj.getString("status")
 
             if (holder is EventItemViewHolder)
             {
@@ -66,7 +70,19 @@ class listTransactionFragment : Fragment() {
                 eventViewHolder.id_transactionTxt.text = id
                 eventViewHolder.check_inTxt.text = check_in
                 eventViewHolder.guest_idTxt.text = guestID
+                if(status.equals("True")){
+                    eventViewHolder.statusTxt.text = "Checkout"
+                    eventViewHolder.statusTxt.setBackgroundColor(Color.parseColor("#10B981"))
+                    eventViewHolder.statusTxt.setTextColor(Color.WHITE)
 
+                }else{
+                    eventViewHolder.statusTxt.text = "No check out"
+                    eventViewHolder.statusTxt.setBackgroundColor(Color.parseColor("#EF4444"))
+                    eventViewHolder.statusTxt.setTextColor(Color.WHITE)
+                }
+                eventViewHolder.cardView.setOnClickListener{
+                    callback.invoke(id)
+                }
             }
         }
     }
@@ -120,7 +136,9 @@ class listTransactionFragment : Fragment() {
             val eventObj = eventArray.getJSONObject(i)
             eventObjects.add(eventObj)
         }
-        mAdapter = EventListAdapter(eventObjects)
+        mAdapter = EventListAdapter(eventObjects){
+            callback.invoke(it)
+        }
         mRecyclerView?.adapter = mAdapter
     }
 
