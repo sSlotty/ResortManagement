@@ -199,7 +199,7 @@ class MainViewModel(private val repository: Repository):ViewModel() {
             .subscribe({ response->
                 val data = Gson().fromJson(response.data, Array<Guest>::class.java).toList()
                 allGuest.value = data
-                if(response.status == 201){
+                if(response.status == 200){
                     listener.invoke(true)
                 }else{
                     listener.invoke(false)

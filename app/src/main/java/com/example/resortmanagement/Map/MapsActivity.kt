@@ -49,6 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 markerOptions.title("Sri Panwa Phuket Luxury Pool Villa Hotel")
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions)
+                mGoogleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng, 11.0F))
             }
         }
